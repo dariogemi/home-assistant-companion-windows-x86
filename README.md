@@ -1,56 +1,85 @@
-# Home Assistant Companion para Windows (x86 / Windows 8+)
+# Home Assistant Companion para Windows (x86)
 
-Cliente de escritorio **32-bit (x86)** para **Windows 8, 8.1, 10 y 11** que ofrece la experiencia completa de **Home Assistant Companion**, integrando tu equipo Windows como dispositivo oficial `mobile_app` en Home Assistant.
+Cliente de escritorio de 32 bits para integrar equipos Windows con Home Assistant mediante la integración oficial `mobile_app`.
 
-> **Nota de distribución:** Este repositorio público contiene exclusivamente la documentación oficial y el **instalador binario compilado** en [GitHub Releases](https://github.com/dariogemi/home-assistant-companion-windows-x86/releases/latest). No incluye código fuente.
+El proyecto apunta a recuperar PCs y tablets x86 que todavía pueden cumplir una función útil como paneles y terminales de automatización. La aplicación incorpora un motor Chromium y un puente nativo .NET Framework 4.0, sin requerir una instalación externa de WebView2.
 
----
+> **Distribución:** este repositorio publica documentación e instaladores compilados en [GitHub Releases](https://github.com/dariogemi/home-assistant-companion-windows-x86/releases). No publica el código fuente.
+>
+> **Proyecto independiente:** no es un producto oficial de Home Assistant ni está afiliado, respaldado o mantenido por Nabu Casa. Utiliza la integración oficial `mobile_app` de Home Assistant.
 
-## Descarga e Instalación
+## Descarga
 
-1. Descarga el instalador desde la última versión publicada:
-   - **[Home-Assistant-Companion-Setup-1.0.0-win-x86.exe](https://github.com/dariogemi/home-assistant-companion-windows-x86/releases/latest)** *(Instalador Windows NSIS 32-bit)*
-2. Ejecuta el instalador y sigue el asistente (permite elegir carpeta de instalación, acceso directo en Escritorio y Menú Inicio).
-3. Abre **Home Assistant Companion** y completa el asistente inicial (*Onboarding*).
+Descarga la versión estable desde [Releases](https://github.com/dariogemi/home-assistant-companion-windows-x86/releases/latest).
 
-### Requisitos del sistema
+- Instalador: `Home-Assistant-Companion-Setup-1.0.0-win-x86.exe`
+- Arquitectura del instalador: x86 (32 bits).
+- Tamaño publicado: aproximadamente 62 MB.
+- SHA-256 publicado: `44655171B66C6AF01D5F9D889D26839B61DEFA28F5753E62915ABE0E3FE582EC`
 
-| Requisito | Detalle |
-| --- | --- |
-| **Sistema operativo** | Windows 8, Windows 8.1, Windows 10 o Windows 11 (ediciones 32-bit x86 y 64-bit x64) |
-| **Arquitectura** | `x86` (32-bit) con motor Chromium 108 integrado (sin WebView2 externo) |
-| **Home Assistant** | Home Assistant Core 2023.x o superior con integración `mobile_app` activa |
-| **Dependencias adicionales** | Ninguna (incluye su propio runtime y puente nativo .NET 4.0 x86 integrado) |
-
----
-
-## Características principales
-
-- **Onboarding oficial:** Descubrimiento automático en red local mediante mDNS (`_home-assistant._tcp.local.`), entrada manual de URL, soporte opcional para certificados SSL autofirmados en LAN y autenticación OAuth2 segura.
-- **Integración nativa con la UI de Home Assistant:** Implementa el puente `window.externalApp` / `externalBus`, habilitando automáticamente el menú **Configuración → Aplicación complementaria** dentro de Home Assistant, refresco automático de sesión y sincronización de tema claro/oscuro.
-- **Múltiples servidores y cambio inteligente de red:** Alterna entre varias instancias de Home Assistant y conmuta automáticamente entre URL interna y externa según el **SSID Wi-Fi** conectado.
-- **15 sensores del PC en tiempo real:** CPU, Memoria RAM, Disco principal, Batería y carga, Ventana y proceso activo, Tiempo inactivo, Volumen y silencio de audio, SSID Wi-Fi, IP local, Monitores conectados, Micrófono/Cámara en uso y Tiempo encendido.
-- **Notificaciones Push WebSocket en tiempo real:** Recibe avisos de `notify.mobile_app_*` sin depender de servicios en la nube de terceros, con soporte para **botones de acción** (`mobile_app_notification_action`).
-- **Comandos remotos del sistema:** Bloquear sesión, suspender, apagar, reiniciar, apagar/encender pantalla, ajustar volumen, control multimedia, Text-to-Speech (TTS) y navegación remota.
-- **Acciones Rápidas, Assist y Bandeja del Sistema:** Atajos globales (`Ctrl+Shift+H`, `Ctrl+Shift+Q`, `Ctrl+Shift+A`), ejecución de entidades fijadas desde la bandeja de Windows y chat directo con **Home Assistant Assist**.
-
----
-
-## Documentación
-
-- [Guía de Usuario y Configuración](docs/USER_GUIDE.md)
-- [Referencia de Sensores, Notificaciones y Comandos Remotos](docs/SENSORS_AND_COMMANDS.md)
-- [Seguridad, Privacidad y Solución de Problemas](docs/SECURITY_AND_PRIVACY.md)
-- [Historial de Cambios](CHANGELOG.md)
-
----
-
-## Verificación de integridad (SHA-256)
-
-| Archivo | Tamaño | SHA-256 |
-| --- | --- | --- |
-| `Home-Assistant-Companion-Setup-1.0.0-win-x86.exe` | 64,973,268 bytes (~61.96 MB) | `44655171B66C6AF01D5F9D889D26839B61DEFA28F5753E62915ABE0E3FE582EC` |
+Verifica el hash antes de ejecutar el instalador:
 
 ```powershell
 Get-FileHash .\Home-Assistant-Companion-Setup-1.0.0-win-x86.exe -Algorithm SHA256
 ```
+
+El valor calculado debe coincidir exactamente con el SHA-256 publicado en la release.
+
+## Compatibilidad y validación
+
+El instalador es x86. En Windows de 64 bits se ejecuta como aplicación de 32 bits mediante la capa de compatibilidad del sistema operativo.
+
+| Sistema operativo anfitrión | Arquitectura del SO | Resultado observado |
+| --- | --- | --- |
+| Windows 8 | x86 (32 bits) | Instalado; acceso a la instancia Home Assistant confirmado en tablet |
+| Windows 11 | x64 (64 bits) | Instalado; acceso a la instancia Home Assistant confirmado en PC |
+| Windows 8.1 | x86 / x64 | Pendiente de prueba documentada |
+| Windows 10 | x86 / x64 | Pendiente de prueba documentada |
+
+**Alcance de la evidencia:** las dos validaciones confirmadas corresponden a instalaciones reales en el entorno del mantenedor y acreditan instalación y acceso a Home Assistant. Además, el proceso de build reportó verificaciones de sintaxis, empaquetado x86, cabeceras PE, respuesta del puente de sensores y arranque del ejecutable. Estas pruebas no constituyen una certificación completa de todos los sensores, notificaciones, comandos, ciclos de actualización ni de todas las ediciones de Windows. Los resultados y sus límites están detallados en [Build Verification & Field Validation](docs/BUILD_AND_VALIDATION.md).
+
+**Importante:** Windows 11 no tiene una edición x86 de 32 bits. La aplicación puede ser x86; el sistema operativo anfitrión debe ser x64.
+
+### Requisitos
+
+- Home Assistant Core con la integración `mobile_app` habilitada.
+- Conectividad IP entre el equipo Windows y la instancia de Home Assistant.
+- No requiere una instalación externa de WebView2.
+- El instalador incluye el runtime y el puente nativo x86 declarados por el proyecto.
+
+## Funcionalidades
+
+- **Onboarding:** descubrimiento mDNS, URL manual y autenticación OAuth2.
+- **Integración frontend:** puente `window.externalApp` / `externalBus`, menú de aplicación complementaria, actualización de sesión y sincronización de tema.
+- **Múltiples servidores:** selección de instancia y conmutación entre URL interna y externa según SSID Wi-Fi.
+- **Sensores del PC:** 15 entidades/sensores declarados para CPU, memoria, disco, batería, ventana activa, inactividad, audio, Wi-Fi, IP, monitores, cámara, micrófono y uptime. La disponibilidad de algunos sensores depende de Windows y del hardware.
+- **Notificaciones locales:** recepción mediante el canal WebSocket de `mobile_app`, con botones de acción.
+- **Comandos remotos opt-in:** bloqueo, suspensión, apagado, reinicio, pantalla, volumen, multimedia, TTS y navegación.
+- **Acceso rápido:** bandeja del sistema, atajos globales, Acciones Rápidas y Home Assistant Assist.
+
+Las funciones de notificación local dependen de que la aplicación mantenga una conexión WebSocket autenticada y activa con Home Assistant. No equivalen a una entrega push garantizada cuando la aplicación está cerrada o desconectada.
+
+## Documentación
+
+- [Guía de usuario y configuración](docs/USER_GUIDE.md)
+- [Sensores, notificaciones y comandos](docs/SENSORS_AND_COMMANDS.md)
+- [Seguridad, privacidad y troubleshooting](docs/SECURITY_AND_PRIVACY.md)
+- [Verificación de build y validación en equipos reales](docs/BUILD_AND_VALIDATION.md)
+- [Checklist de calidad para releases](docs/RELEASE_CHECKLIST.md)
+- [Historial de cambios](CHANGELOG.md)
+
+## Seguridad y privacidad
+
+La aplicación interactúa con la instancia Home Assistant configurada por el usuario. La documentación describe el almacenamiento local de credenciales y la posibilidad de habilitar certificados autofirmados por servidor.
+
+El archivo de configuración debe tratarse como información sensible: puede contener tokens OAuth2 y el identificador de webhook, que Home Assistant utiliza como credencial para las llamadas webhook. No compartas archivos de configuración ni diagnósticos sin revisar y redactar secretos.
+
+Antes de utilizar comandos remotos, revisá la opción de habilitación y limitá quién puede invocar las automatizaciones correspondientes. Más detalles en [Seguridad y privacidad](docs/SECURITY_AND_PRIVACY.md).
+
+## Estado del proyecto
+
+- Versión publicada: **1.0.0**
+- Canal: instalador binario y documentación.
+- Código fuente: no publicado en este repositorio.
+- Validación práctica documentada: Windows 11 x64 y Windows 8 x86, con acceso a Home Assistant.
+- Incidencias y sugerencias: [GitHub Issues](https://github.com/dariogemi/home-assistant-companion-windows-x86/issues).
