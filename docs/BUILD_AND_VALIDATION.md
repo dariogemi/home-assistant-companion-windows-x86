@@ -1,103 +1,103 @@
-# Build Verification & Field Validation
+# Verificación del build y validación en equipos reales
 
-This document records the build checks and real-device smoke tests reported for the v1.0.0 Windows x86 release. It separates build-time checks from runtime integration tests and identifies which evidence has not been independently reproduced.
+Este documento registra las comprobaciones de construcción y las pruebas de humo realizadas en equipos reales que fueron reportadas para la versión v1.0.0 de Windows x86. Separa las verificaciones de compilación de las pruebas de ejecución e integración, e identifica qué evidencia no fue reproducida de forma independiente.
 
-## 1. Build and packaging checks
+## 1. Construcción y empaquetado
 
-The maintainer-provided Antigravity build session reported the following results:
+La sesión de build proporcionada por el mantenedor en Antigravity reportó los siguientes resultados:
 
-| Check | Reported result | What it demonstrates |
+| Comprobación | Resultado reportado | Qué demuestra |
 | --- | --- | --- |
-| JavaScript syntax: `node --check` over files in `src/` | Passed without errors | The checked JavaScript files parsed successfully |
-| `npm run package:x86` | Exit code 0 | The x86 portable package task completed |
-| Portable application output | `dist/Home Assistant Companion-win32-ia32/Home Assistant Companion.exe` | A portable x86 application directory was produced |
-| Native bridge test: `ha-sys-bridge.exe sensors` | Returned a JSON telemetry payload | The bridge started and returned sensor data on the build machine |
-| Packaged application startup | Process remained active during a 3-second startup observation | The packaged executable launched; this is only a short startup smoke test |
+| Sintaxis JavaScript: `node --check` sobre archivos de `src/` | Sin errores | Los archivos JavaScript revisados pudieron analizarse sintácticamente |
+| `npm run package:x86` | Código de salida 0 | Finalizó la tarea de empaquetado x86 |
+| Salida portable | `dist/Home Assistant Companion-win32-ia32/Home Assistant Companion.exe` | Se generó una carpeta portable para x86 |
+| Prueba del puente nativo: `ha-sys-bridge.exe sensors` | Devolvió un payload JSON de telemetría | El puente arrancó y devolvió datos de sensores en el equipo de build |
+| Arranque de la aplicación empaquetada | El proceso permaneció activo durante una observación de 3 segundos | El ejecutable inició; se trata únicamente de una prueba breve de arranque |
 
-The build transcript reported these PE header values:
+La transcripción del build reportó los siguientes valores de cabecera PE:
 
-| Executable | Architecture | Reported MinOS | Reported Subsystem |
+| Ejecutable | Arquitectura | MinOS reportado | Subsystem reportado |
 | --- | --- | --- | --- |
-| `Home Assistant Companion.exe` | x86 (32-bit) | 5.1 | 5.1 |
-| `ha-sys-bridge.exe` | x86 (32-bit) | 4.0 | 4.0 |
+| `Home Assistant Companion.exe` | x86 (32 bits) | 5.1 | 5.1 |
+| `ha-sys-bridge.exe` | x86 (32 bits) | 4.0 | 4.0 |
 
-The installer session also reported an NSIS x86 installer built with Electron Builder, including `ha-sys-bridge.exe` and `ha-icon.png` under the unpacked resources directory, with an installation-directory selector, Start Menu/Desktop shortcuts and an uninstaller.
+La sesión de generación del instalador también reportó un instalador NSIS x86 construido con Electron Builder, incluyendo `ha-sys-bridge.exe` y `ha-icon.png` en el directorio de recursos desempaquetados, selector de carpeta de instalación, accesos directos al Menú Inicio y Escritorio, y desinstalador.
 
-### Interpretation and limits
+### Interpretación y límites
 
-- These results are transcribed from the maintainer-provided build session; they have not been independently rerun by this documentation change.
-- A successful syntax check or package task does not establish runtime correctness of every feature.
-- PE architecture and version fields are useful compatibility evidence, but do not prove that every Windows release, driver, hardware device or dependency combination works.
-- A three-second process observation proves only that the process launched and remained present during that observation.
-- The bridge sensor command demonstrates a telemetry response on the build machine; it does not prove every sensor works on every Windows version.
-- The build transcript stated that OAuth2 and the Home Assistant WebSocket connection were still to be tested against a real Home Assistant server at that stage. Subsequent field validation is recorded separately below.
+- Estos resultados se transcriben de la sesión de build proporcionada por el mantenedor; esta actualización documental no los volvió a ejecutar de forma independiente.
+- Una comprobación de sintaxis o una tarea de empaquetado exitosa no demuestra que todas las funciones se comporten correctamente en ejecución.
+- La arquitectura PE y los campos de versión son evidencia técnica útil, pero no prueban compatibilidad con todas las versiones de Windows, controladores, dispositivos o combinaciones de dependencias.
+- Una observación de tres segundos demuestra únicamente que el proceso inició y permaneció presente durante ese intervalo.
+- La prueba del puente demuestra que devolvió telemetría en el equipo de build; no prueba que todos los sensores funcionen en todas las versiones de Windows.
+- La sesión original indicó que OAuth2 y la conexión WebSocket con Home Assistant todavía debían probarse contra un servidor real en esa etapa. La validación posterior en equipos reales se registra por separado a continuación.
 
-## 2. Installer artifact
+## 2. Artefacto del instalador
 
-The v1.0.0 release record identifies:
+El registro de la release v1.0.0 identifica:
 
-- File: `Home-Assistant-Companion-Setup-1.0.0-win-x86.exe`
-- Target architecture: x86 (32-bit)
-- Packaging: NSIS x86 installer
-- Size: 64,973,268 bytes (approximately 61.96 MiB)
-- Published SHA-256: `44655171B66C6AF01D5F9D889D26839B61DEFA28F5753E62915ABE0E3FE582EC`
+- Archivo: `Home-Assistant-Companion-Setup-1.0.0-win-x86.exe`
+- Arquitectura objetivo: x86 (32 bits)
+- Empaquetado: instalador NSIS x86
+- Tamaño: 64.973.268 bytes (aproximadamente 61,96 MiB)
+- SHA-256 publicado: `44655171B66C6AF01D5F9D889D26839B61DEFA28F5753E62915ABE0E3FE582EC`
 
-Verify a downloaded installer before execution:
+Verificá el instalador descargado antes de ejecutarlo:
 
 ```powershell
 Get-FileHash .\Home-Assistant-Companion-Setup-1.0.0-win-x86.exe -Algorithm SHA256
 ```
 
-The locally calculated digest must match the digest published for the GitHub Release. This repository does not claim that the installer is Authenticode-signed; verify its signature independently if a signed build becomes available.
+El hash calculado localmente debe coincidir con el publicado en GitHub Releases. Este repositorio no afirma que el instalador tenga firma Authenticode; si se publica una versión firmada, verificá su firma de manera independiente.
 
-## 3. Real-device field validation
+## 3. Validación en equipos reales
 
-The maintainer confirmed that the released Companion was installed on both of the following devices and accessed the configured Home Assistant instance:
+El mantenedor confirmó que el Companion publicado fue instalado en los siguientes equipos y accedió a la instancia de Home Assistant configurada:
 
-| Device | Operating system | OS architecture | Result |
+| Equipo | Sistema operativo | Arquitectura del SO | Resultado |
 | --- | --- | --- | --- |
-| PC | Windows 11 | x64 (64-bit) | Installed; access to Home Assistant confirmed |
-| Tablet | Windows 8 | x86 (32-bit) | Installed; access to Home Assistant confirmed |
+| PC | Windows 11 | x64 (64 bits) | Instalado; acceso a Home Assistant confirmado |
+| Tablet | Windows 8 | x86 (32 bits) | Instalado; acceso a Home Assistant confirmado |
 
-These are real-device smoke tests and materially strengthen the compatibility evidence. They establish installation and successful access to the configured Home Assistant instance on those two specific environments.
+Estas pruebas de humo en equipos reales fortalecen la evidencia de compatibilidad. Confirman la instalación y el acceso a Home Assistant en esos dos entornos específicos.
 
-They do not, by themselves, establish that every sensor, notification action, remote command, reconnection scenario, upgrade path or uninstall path was exercised on both devices. Exact OS build numbers and per-feature test records have not yet been attached to this public repository.
+Por sí solas no demuestran que se hayan probado todos los sensores, acciones de notificación, comandos remotos, escenarios de reconexión, actualización o desinstalación en ambos equipos. Los números exactos de compilación de Windows y los registros de pruebas por funcionalidad todavía no se adjuntaron a este repositorio público.
 
-## 4. Compatibility matrix
+## 4. Matriz de compatibilidad
 
-| Host operating system | Architecture | Evidence status |
+| Sistema operativo anfitrión | Arquitectura | Estado de evidencia |
 | --- | --- | --- |
-| Windows 8 | x86 | Field smoke test: installation and Home Assistant access confirmed on a tablet |
-| Windows 11 | x64 | Field smoke test: installation and Home Assistant access confirmed on a PC |
-| Windows 8 | x64 | Not yet documented |
-| Windows 8.1 | x86 / x64 | Not yet documented |
-| Windows 10 | x86 / x64 | Not yet documented |
+| Windows 8 | x86 | Prueba real: instalación y acceso a Home Assistant confirmados en una tablet |
+| Windows 11 | x64 | Prueba real: instalación y acceso a Home Assistant confirmados en un PC |
+| Windows 8 | x64 | Todavía no documentado |
+| Windows 8.1 | x86 / x64 | Todavía no documentado |
+| Windows 10 | x86 / x64 | Todavía no documentado |
 
-Windows 11 is available as a 64-bit host; the x86 application runs as a 32-bit process on that host. Do not describe Windows 11 as a 32-bit operating system.
+Windows 11 se ofrece como sistema anfitrión de 64 bits; la aplicación x86 se ejecuta como proceso de 32 bits sobre ese sistema. No describir Windows 11 como un sistema operativo de 32 bits.
 
-## 5. Home Assistant integration test boundary
+## 5. Alcance de las pruebas de integración con Home Assistant
 
-The original build session explicitly left OAuth2 and WebSocket validation against a real Home Assistant instance for a later test. The subsequent field tests confirmed access to Home Assistant from the Windows 8 x86 tablet and Windows 11 x64 PC.
+La sesión original de build dejó explícitamente para una etapa posterior la validación de OAuth2 y WebSocket contra una instancia real de Home Assistant. Las pruebas de campo posteriores confirmaron el acceso a Home Assistant desde la tablet Windows 8 x86 y el PC Windows 11 x64.
 
-The following detailed integration tests remain separate checklist items until individually exercised and recorded:
+Las siguientes pruebas detalladas permanecen como tareas separadas hasta que se ejecuten y documenten individualmente:
 
-- OAuth2 login, refresh and logout.
-- Device and webhook registration through `mobile_app`.
-- Sensor update cadence and enabled/disabled behavior.
-- Notification delivery while the WebSocket is connected.
-- Notification action event handling.
-- WebSocket reconnect after network loss or Home Assistant restart.
-- Each documented remote command.
-- Internal/external URL switching and SSID behavior.
+- Inicio de sesión OAuth2, renovación y cierre de sesión.
+- Registro del dispositivo y webhook mediante `mobile_app`.
+- Frecuencia de actualización de sensores y comportamiento al habilitarlos o deshabilitarlos.
+- Entrega de notificaciones mientras WebSocket está conectado.
+- Procesamiento de eventos de botones de acción.
+- Reconexión WebSocket después de perder la red o reiniciar Home Assistant.
+- Cada uno de los comandos remotos documentados.
+- Cambio entre URL interna/externa y comportamiento según SSID.
 
-## 6. Build provenance and reproducibility
+## 6. Procedencia y reproducibilidad del build
 
-The public repository intentionally contains documentation and release binaries, not the application source code. Consequently:
+El repositorio público distribuye intencionalmente documentación e instaladores compilados, no el código fuente de la aplicación. Por lo tanto:
 
-- The source tree and exact source revision used for v1.0.0 are not available in this repository.
-- The build workspace's local filesystem path is intentionally not published.
-- The build results above are maintainer-reported evidence, not a reproducible public CI build.
-- No public CI workflow is claimed to rebuild the release artifact.
-- Future releases should retain a private build record containing source revision, toolchain versions, dependency lockfile, build logs, artifact hash and test evidence.
+- El árbol de código fuente y la revisión exacta utilizada para v1.0.0 no están disponibles en este repositorio.
+- La ruta local del espacio de trabajo de build no se publica.
+- Los resultados anteriores son evidencia reportada por el mantenedor, no una compilación reproducible mediante CI público.
+- No se afirma que exista un workflow público de CI que reconstruya el artefacto publicado.
+- Para futuras versiones se recomienda conservar un registro privado de build con revisión del código fuente, versiones de herramientas, archivo de dependencias, logs, hash del artefacto y evidencia de pruebas.
 
-This distinction preserves the source-code distribution boundary while making the available evidence transparent.
+Esta distinción mantiene el límite de distribución del código fuente y, al mismo tiempo, deja transparente la evidencia disponible.
