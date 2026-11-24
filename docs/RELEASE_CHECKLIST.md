@@ -1,4 +1,4 @@
-# Release Quality Checklist
+# Lista de verificación de calidad de publicaciones
 
 Use this checklist before publishing a new installer. Mark an item complete only when evidence is available for the exact build being released.
 
@@ -80,7 +80,7 @@ For each additional tested platform, record OS build, architecture, installation
 
 ## Evidence record
 
-For the v1.0.0 build and field-test evidence, see [Build Verification & Field Validation](BUILD_AND_VALIDATION.md). Keep build-time checks, short startup observations and real-device integration smoke tests as separate evidence categories.
+Para consultar la evidencia de build y las pruebas de campo de v1.0.0, ver [Verificación del build y validación en equipos reales](BUILD_AND_VALIDATION.md). Mantené las comprobaciones de build, las observaciones breves de arranque y las pruebas de integración en equipos reales como categorías de evidencia separadas.
 
 For each release, retain:
 
@@ -108,4 +108,4 @@ For each release, retain:
 - [ ] Independently reproduce the build and attach raw logs, exact toolchain versions and source revision to a private provenance record.
 - [ ] Run feature-by-feature integration tests against Home Assistant and retain redacted evidence.
 
-The completed items above are maintainer-reported build-session results, not independently rerun by this documentation update. See [Build Verification & Field Validation](BUILD_AND_VALIDATION.md) for interpretation and limitations.
+The completed items above are maintainer-reported build-session results, not independently rerun by this documentation update. Ver [Verificación del build y validación en equipos reales](BUILD_AND_VALIDATION.md) for interpretation and limitations.
