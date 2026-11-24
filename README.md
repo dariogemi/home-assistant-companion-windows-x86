@@ -34,7 +34,6 @@ El instalador es x86. En Windows de 64 bits se ejecuta como aplicación de 32 bi
 | Windows 8 | x86 (32 bits) | Instalado; acceso a la instancia Home Assistant confirmado en tablet |
 | Windows 11 | x64 (64 bits) | Instalado; acceso a la instancia Home Assistant confirmado en PC |
 | Windows 8.1 | x86 / x64 | Pendiente de prueba documentada |
-| Windows 8.1 | x64 | Pendiente de prueba documentada |
 | Windows 10 | x86 / x64 | Pendiente de prueba documentada |
 
 **Alcance de la evidencia:** las dos validaciones confirmadas corresponden a instalaciones reales en el entorno del mantenedor y acreditan instalación y conectividad con Home Assistant. No constituyen por sí solas una certificación completa de todos los sensores, notificaciones, comandos, ciclos de actualización ni de todas las ediciones de Windows. Los demás escenarios deben probarse y registrarse por separado.
