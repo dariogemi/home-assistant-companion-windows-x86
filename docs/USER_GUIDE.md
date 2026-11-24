@@ -6,7 +6,7 @@
 2. La aplicación escaneará tu red local usando mDNS (`_home-assistant._tcp.local.`) y direcciones locales estándar (`homeassistant.local:8123`).
 3. Si tu servidor no aparece o usas una dirección personalizada:
    - Haz clic en **Introducir dirección manualmente**.
-   - Ingresa tu URL interna (por ejemplo, `http://homeassistant.local:8123` o `https://192.168.1.50:8123`).
+   - Ingresa tu URL interna (por ejemplo, `http://homeassistant.local:8123` o `https://homeassistant.example:8123`).
    - Opcionalmente agrega una **URL Externa** para acceder fuera de tu red local.
    - Si usas HTTPS con certificado autofirmado en red local, marca **Permitir certificados SSL autofirmados en red local**.
 4. Inicia sesión con tu usuario de Home Assistant en la ventana OAuth2.
