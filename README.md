@@ -36,7 +36,7 @@ El instalador es x86. En Windows de 64 bits se ejecuta como aplicación de 32 bi
 | Windows 8.1 | x86 / x64 | Pendiente de prueba documentada |
 | Windows 10 | x86 / x64 | Pendiente de prueba documentada |
 
-**Alcance de la evidencia:** las dos validaciones confirmadas corresponden a instalaciones reales en el entorno del mantenedor y acreditan instalación y acceso a Home Assistant. Además, el proceso de build reportó verificaciones de sintaxis, empaquetado x86, cabeceras PE, respuesta del puente de sensores y arranque del ejecutable. Estas pruebas no constituyen una certificación completa de todos los sensores, notificaciones, comandos, ciclos de actualización ni de todas las ediciones de Windows. Los resultados y sus límites están detallados en [Build Verification & Field Validation](docs/BUILD_AND_VALIDATION.md).
+**Alcance de la evidencia:** las dos validaciones confirmadas corresponden a instalaciones reales en el entorno del mantenedor y acreditan instalación y acceso a Home Assistant. Además, el proceso de build reportó verificaciones de sintaxis, empaquetado x86, cabeceras PE, respuesta del puente de sensores y arranque del ejecutable. Estas pruebas no constituyen una certificación completa de todos los sensores, notificaciones, comandos, ciclos de actualización ni de todas las ediciones de Windows. Los resultados y sus límites están detallados en [Verificación del build y validación en equipos reales](docs/BUILD_AND_VALIDATION.md).
 
 **Importante:** Windows 11 no tiene una edición x86 de 32 bits. La aplicación puede ser x86; el sistema operativo anfitrión debe ser x64.
 
@@ -63,7 +63,7 @@ Las funciones de notificación local dependen de que la aplicación mantenga una
 
 - [Guía de usuario y configuración](docs/USER_GUIDE.md)
 - [Sensores, notificaciones y comandos](docs/SENSORS_AND_COMMANDS.md)
-- [Seguridad, privacidad y troubleshooting](docs/SECURITY_AND_PRIVACY.md)
+- [Seguridad, privacidad y solución de problemas](docs/SECURITY_AND_PRIVACY.md)
 - [Verificación de build y validación en equipos reales](docs/BUILD_AND_VALIDATION.md)
 - [Checklist de calidad para releases](docs/RELEASE_CHECKLIST.md)
 - [Historial de cambios](CHANGELOG.md)
