@@ -1,5 +1,13 @@
 # Historial de Cambios
 
+## [Unreleased]
+
+### Documentación y calidad
+- README renovado con alcance del producto, compatibilidad de arquitectura y límites de notificaciones locales.
+- Aclaración de que el proyecto es independiente y utiliza la integración oficial `mobile_app`.
+- Guía de seguridad ampliada para proteger tokens OAuth2 y el identificador de webhook.
+- Nuevo checklist de calidad para pruebas de compatibilidad, instalación, integración, seguridad y publicación.
+
 ## [1.0.0] - 2026-11-19
 
 ### Novedades
