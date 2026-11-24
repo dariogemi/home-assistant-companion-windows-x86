@@ -25,18 +25,21 @@ Get-FileHash .\Home-Assistant-Companion-Setup-1.0.0-win-x86.exe -Algorithm SHA25
 
 El valor calculado debe coincidir exactamente con el SHA-256 publicado en la release.
 
-## Compatibilidad declarada
+## Compatibilidad y validación
 
 El instalador es x86. En Windows de 64 bits se ejecuta como aplicación de 32 bits mediante la capa de compatibilidad del sistema operativo.
 
-| Sistema operativo | Host | Estado que debe validarse por release |
+| Sistema operativo anfitrión | Arquitectura del SO | Resultado observado |
 | --- | --- | --- |
-| Windows 8 | x86 / x64 | Prueba de instalación, onboarding y sensores |
-| Windows 8.1 | x86 / x64 | Prueba de instalación, onboarding y sensores |
-| Windows 10 | x86 / x64 | Prueba de instalación, onboarding y sensores |
-| Windows 11 | x64 | Prueba de instalación, onboarding y sensores |
+| Windows 8 | x86 (32 bits) | Instalado; acceso a la instancia Home Assistant confirmado en tablet |
+| Windows 11 | x64 (64 bits) | Instalado; acceso a la instancia Home Assistant confirmado en PC |
+| Windows 8.1 | x86 / x64 | Pendiente de prueba documentada |
+| Windows 8.1 | x64 | Pendiente de prueba documentada |
+| Windows 10 | x86 / x64 | Pendiente de prueba documentada |
 
-**Importante:** Windows 11 no tiene una edición x86 de 32 bits. La aplicación puede ser x86; el sistema operativo anfitrión debe ser x64. La tabla expresa el objetivo de compatibilidad del proyecto, no sustituye los resultados de pruebas en equipos físicos o máquinas virtuales. Consultá las notas de cada release para conocer la validación efectivamente realizada.
+**Alcance de la evidencia:** las dos validaciones confirmadas corresponden a instalaciones reales en el entorno del mantenedor y acreditan instalación y conectividad con Home Assistant. No constituyen por sí solas una certificación completa de todos los sensores, notificaciones, comandos, ciclos de actualización ni de todas las ediciones de Windows. Los demás escenarios deben probarse y registrarse por separado.
+
+**Importante:** Windows 11 no tiene una edición x86 de 32 bits. La aplicación puede ser x86; el sistema operativo anfitrión debe ser x64.
 
 ### Requisitos
 
@@ -78,5 +81,5 @@ Antes de utilizar comandos remotos, revisá la opción de habilitación y limit�
 - Versión publicada: **1.0.0**
 - Canal: instalador binario y documentación.
 - Código fuente: no publicado en este repositorio.
+- Validación práctica documentada: Windows 11 x64 y Windows 8 x86, con acceso a Home Assistant.
 - Incidencias y sugerencias: [GitHub Issues](https://github.com/dariogemi/home-assistant-companion-windows-x86/issues).
-
