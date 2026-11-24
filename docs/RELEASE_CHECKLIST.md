@@ -80,6 +80,8 @@ For each additional tested platform, record OS build, architecture, installation
 
 ## Evidence record
 
+For the v1.0.0 build and field-test evidence, see [Build Verification & Field Validation](BUILD_AND_VALIDATION.md). Keep build-time checks, short startup observations and real-device integration smoke tests as separate evidence categories.
+
 For each release, retain:
 
 - Version and release tag.
@@ -95,3 +97,15 @@ For each release, retain:
 - Windows 11 x64 PC: Companion installed and access to the configured Home Assistant instance confirmed.
 - Windows 8 x86 tablet: Companion installed and access to the configured Home Assistant instance confirmed.
 - Evidence scope: maintainer-reported real-device smoke tests. Detailed OS build numbers, installer hash per device, feature-by-feature results and reproducible test artifacts have not yet been attached to this repository.
+
+### Build verification — v1.0.0
+
+- [x] JavaScript syntax check reported successful for files in `src/` (`node --check`).
+- [x] `npm run package:x86` reported exit code 0.
+- [x] PE headers reported x86 architecture for the application and native bridge.
+- [x] `ha-sys-bridge.exe sensors` reported a JSON telemetry response on the build machine.
+- [x] Packaged application reported to remain running during a 3-second startup observation.
+- [ ] Independently reproduce the build and attach raw logs, exact toolchain versions and source revision to a private provenance record.
+- [ ] Run feature-by-feature integration tests against Home Assistant and retain redacted evidence.
+
+The completed items above are maintainer-reported build-session results, not independently rerun by this documentation update. See [Build Verification & Field Validation](BUILD_AND_VALIDATION.md) for interpretation and limitations.
