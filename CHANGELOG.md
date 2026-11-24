@@ -8,6 +8,8 @@
 - Guía de seguridad ampliada para proteger tokens OAuth2 y el identificador de webhook.
 - Nuevo checklist de calidad para pruebas de compatibilidad, instalación, integración, seguridad y publicación.
 - Registro de validación práctica en Windows 11 x64 (PC) y Windows 8 x86 (tablet), ambos instalados y conectados a Home Assistant; alcance limitado a smoke test.
+- Nueva documentación de build: `node --check`, `npm run package:x86`, cabeceras PE x86, respuesta JSON del puente de sensores y observación de arranque de 3 segundos, con límites de evidencia explícitos.
+- Separación entre resultados reportados del proceso de build, validaciones reales de campo y pruebas de integración aún pendientes.
 
 ## [1.0.0] - 2026-11-19
 
