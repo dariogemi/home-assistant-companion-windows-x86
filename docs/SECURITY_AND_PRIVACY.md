@@ -50,7 +50,7 @@ Si se habilita:
 
 ## Privacidad
 
-El proyecto declara no utilizar telemetría de terceros ni servidores intermediarios. Las funciones de red descritas requieren comunicación con la instancia Home Assistant configurada.
+El proyecto declara no utilizar telemetría de terceros ni servidores intermediarios. Esta afirmación describe el comportamiento declarado por el producto; como el código fuente no se publica, no se presenta aquí como una conclusión de auditoría independiente. Las funciones de red descritas requieren comunicación con la instancia Home Assistant configurada.
 
 Los sensores de ventana activa, procesos, cámara, micrófono, red y nombre de usuario pueden revelar información sobre la actividad del equipo. Habilitá únicamente los sensores que realmente necesites y considerá quién puede consultar esas entidades dentro de Home Assistant.
 
