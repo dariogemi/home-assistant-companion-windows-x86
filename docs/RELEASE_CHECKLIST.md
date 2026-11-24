@@ -15,15 +15,17 @@ Use this checklist before publishing a new installer. Mark an item complete only
 
 Run tests on clean machines or snapshots. Do not infer support from successful compilation.
 
-- [ ] Windows 8 x86
-- [ ] Windows 8 x64
-- [ ] Windows 8.1 x86
-- [ ] Windows 8.1 x64
-- [ ] Windows 10 x86
-- [ ] Windows 10 x64
-- [ ] Windows 11 x64
+| Platform | Smoke-test evidence currently recorded |
+| --- | --- |
+| Windows 8 x86 | Installed on a tablet; access to the configured Home Assistant instance confirmed |
+| Windows 11 x64 | Installed on a PC; access to the configured Home Assistant instance confirmed |
+| Windows 8 x64 | Not yet documented |
+| Windows 8.1 x86 / x64 | Not yet documented |
+| Windows 10 x86 / x64 | Not yet documented |
 
-For each tested platform, record OS build, architecture, installation result, startup result, onboarding result and known limitations. Windows 11 has no 32-bit x86 edition; the x86 application must run on a supported x64 host.
+The two recorded results are maintainer-environment smoke tests, not a complete compatibility certification. They establish installation and Home Assistant connectivity only. They do not imply that every sensor, notification path, remote command, upgrade/uninstall path, or hardware-specific feature has been tested on those machines.
+
+For each additional tested platform, record OS build, architecture, installation result, startup result, onboarding result and known limitations. Windows 11 has no 32-bit x86 edition; the x86 application must run on a supported x64 host.
 
 ## 3. Installation and lifecycle
 
@@ -87,3 +89,9 @@ For each release, retain:
 - Operating-system test matrix and results.
 - Security checks performed and any exceptions.
 - Known issues and rollback instructions.
+
+### Current field validation — 2026-11-23
+
+- Windows 11 x64 PC: Companion installed and access to the configured Home Assistant instance confirmed.
+- Windows 8 x86 tablet: Companion installed and access to the configured Home Assistant instance confirmed.
+- Evidence scope: maintainer-reported real-device smoke tests. Detailed OS build numbers, installer hash per device, feature-by-feature results and reproducible test artifacts have not yet been attached to this repository.
